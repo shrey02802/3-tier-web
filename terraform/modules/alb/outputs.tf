@@ -1,74 +1,35 @@
-################################################################################
-# Load Balancer
-################################################################################
-
-output "id" {
-  description = "The ID and ARN of the load balancer we created"
-  value       = try(aws_lb.this[0].id, null)
+output "alb_id" {
+  description = "ID of the ALB"
+  value       = aws_lb.this.id
 }
 
-output "arn" {
-  description = "The ID and ARN of the load balancer we created"
-  value       = try(aws_lb.this[0].arn, null)
+output "alb_arn" {
+  description = "ARN of the ALB"
+  value       = aws_lb.this.arn
 }
 
-output "arn_suffix" {
-  description = "ARN suffix of our load balancer - can be used with CloudWatch"
-  value       = try(aws_lb.this[0].arn_suffix, null)
+output "alb_dns_name" {
+  description = "DNS name of the ALB"
+  value       = aws_lb.this.dns_name
 }
 
-output "dns_name" {
-  description = "The DNS name of the load balancer"
-  value       = try(aws_lb.this[0].dns_name, null)
+output "alb_zone_id" {
+  description = "Zone ID of the ALB"
+  value       = aws_lb.this.zone_id
 }
 
-output "zone_id" {
-  description = "The zone_id of the load balancer to assist with creating DNS records"
-  value       = try(aws_lb.this[0].zone_id, null)
+output "target_group_arn" {
+  description = "ARN of the target group"
+  value       = aws_lb_target_group.this.arn
 }
 
-################################################################################
-# Listener(s)
-################################################################################
-
-output "listeners" {
-  description = "Map of listeners created and their attributes"
-  value       = aws_lb_listener.this
+output "target_group_id" {
+  description = "ID of the target group"
+  value       = aws_lb_target_group.this.id
 }
 
-output "listener_rules" {
-  description = "Map of listeners rules created and their attributes"
-  value       = aws_lb_listener_rule.this
+output "listener_arn" {
+  description = "ARN of the listener"
+  value       = aws_lb_listener.this.arn
 }
 
-################################################################################
-# Target Group(s)
-################################################################################
-
-output "target_groups" {
-  description = "Map of target groups created and their attributes"
-  value       = aws_lb_target_group.this
-}
-
-################################################################################
-# Security Group
-################################################################################
-
-output "security_group_arn" {
-  description = "Amazon Resource Name (ARN) of the security group"
-  value       = try(aws_security_group.this[0].arn, null)
-}
-
-output "security_group_id" {
-  description = "ID of the security group"
-  value       = try(aws_security_group.this[0].id, null)
-}
-
-################################################################################
-# Route53 Record(s)
-################################################################################
-
-output "route53_records" {
-  description = "The Route53 records created and attached to the load balancer"
-  value       = aws_route53_record.this
-}
